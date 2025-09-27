@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CRUD_EF")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac0a35e1efda39d4126d2b222e69c9d6f7cc8bb6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+50f59d8a7f136b1ad635cbb0038647c5494c3e29")]
 [assembly: System.Reflection.AssemblyProductAttribute("CRUD_EF")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CRUD_EF")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
