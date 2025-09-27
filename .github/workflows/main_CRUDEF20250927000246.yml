@@ -1,4 +1,69 @@
-﻿# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+﻿# # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# # More GitHub Actions for Azure: https://github.com/Azure/actions
+
+# name: Build and deploy ASP.Net Core app to Azure Web App - CRUDEF20250927000246
+
+# on:
+#   push:
+#     branches:
+#       - main
+#   workflow_dispatch:
+
+# jobs:
+#   build:
+#     runs-on: windows-latest
+#     permissions:
+#       contents: read #This is required for actions/checkout
+
+#     steps:
+#       - uses: actions/checkout@v4
+
+#       - name: Set up .NET Core
+#         uses: actions/setup-dotnet@v4
+#         with:
+#           dotnet-version: '9.x'
+
+#       - name: Build with dotnet
+#         run: dotnet build --configuration Release
+
+#       - name: dotnet publish
+#         run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+
+#       - name: Upload artifact for deployment job
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: .net-app
+#           path: ${{env.DOTNET_ROOT}}/myapp
+
+#   deploy:
+#     runs-on: windows-latest
+#     needs: build
+#     permissions:
+#       id-token: write #This is required for requesting the JWT
+#       contents: read #This is required for actions/checkout
+
+#     steps:
+#       - name: Download artifact from build job
+#         uses: actions/download-artifact@v4
+#         with:
+#           name: .net-app
+      
+#       - name: Login to Azure
+#         uses: azure/login@v2
+#         with:
+#           client-id: c7da7f44-1d88-43c6-88e2-b8356c99bb5e
+#           tenant-id: d00470c1-2144-4ee6-88fe-6732519fc163
+#           subscription-id: 7ee13f35-c8ae-4744-bd9c-ce57fd3ae6c7
+
+#       - name: Deploy to Azure Web App
+#         id: deploy-to-webapp
+#         uses: azure/webapps-deploy@v3
+#         with:
+#           app-name: 'CRUDEF20250927000246'
+#           slot-name: 'Production'
+#           package: .
+
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
 name: Build and deploy ASP.Net Core app to Azure Web App - CRUDEF20250927000246
@@ -38,23 +103,13 @@ jobs:
   deploy:
     runs-on: windows-latest
     needs: build
-    permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
-
+    
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: .net-app
       
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: c7da7f44-1d88-43c6-88e2-b8356c99bb5e
-          tenant-id: d00470c1-2144-4ee6-88fe-6732519fc163
-          subscription-id: 7ee13f35-c8ae-4744-bd9c-ce57fd3ae6c7
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -62,3 +117,4 @@ jobs:
           app-name: 'CRUDEF20250927000246'
           slot-name: 'Production'
           package: .
+          publish-profile: ${{ secrets.__publishingprofilesecretname__ }}
