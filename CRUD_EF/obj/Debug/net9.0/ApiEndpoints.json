@@ -1,16 +1,6 @@
 [
   {
     "ContainingType": "CRUD_EF.Controllers.TareaController",
-    "Method": "GetAsync",
-    "RelativePath": "api/Tarea",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CRUD_EF.Controllers.TareaController",
     "Method": "PostAsync",
     "RelativePath": "api/Tarea",
     "HttpMethod": "POST",
@@ -71,6 +61,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CRUD_EF.Controllers.TareaController",
+    "Method": "GetAsync",
+    "RelativePath": "api/Tarea/Obtener",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]
