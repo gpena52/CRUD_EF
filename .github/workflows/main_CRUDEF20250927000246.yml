@@ -1,63 +1,33 @@
-﻿name: Build and deploy ASP.Net Core app to Azure Web App - CRUDEF20250927000246
+﻿name: Build & Deploy to gh-pages
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
+
+permissions:
+  contents: write   # allow the GITHUB_TOKEN to push updates
 
 jobs:
   build:
-    runs-on: windows-latest
-    permissions:
-      contents: read
-
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '9.x'
+          dotnet-version: "8.0.x"
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+      - name: Restore and Build
+        run: |
+          dotnet restore
+          dotnet build --configuration Release --no-restore
+          dotnet publish -c Release -o publish_output
 
-      - name: dotnet publish
-        run: dotnet publish -c Release -o "${{ env.DOTNET_ROOT }}/myapp"
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: .net-app
-          path: ${{ env.DOTNET_ROOT }}/myapp
-
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    permissions:
-      id-token: write    # Needed if using OIDC login
-      contents: read     # To read repository contents / artifacts
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: .net-app
-          path: .
-
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: c7da7f44-1d88-43c6-88e2-b8356c99bb5e
-          tenant-id: d00470c1-2144-4ee6-88fe-6732519fc163
-          subscription-id: 7ee13f35-c8ae-4744-bd9c-ce57fd3ae6c7
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'CRUDEF20250927000246'
-          slot-name: 'Production'
-          package: .
-          publish-profile: ${{ secrets.__publishingprofilesecretname__ }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./publish_output
