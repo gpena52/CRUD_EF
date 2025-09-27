@@ -72,15 +72,5 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CRUD_EF.Controllers.TareaController",
-    "Method": "GetAsyn",
-    "RelativePath": "api/Tarea/prueba",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
   }
 ]
