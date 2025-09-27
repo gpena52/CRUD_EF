@@ -15,7 +15,7 @@ namespace CRUD_EF.Controllers
             _db = db;
         }
 
-        [HttpGet("Obtener2")]
+        [HttpGet("Obtener")]
         public async Task<IActionResult> GetAsync()
         {
             return Ok(await _db.Tareas.ToListAsync());
