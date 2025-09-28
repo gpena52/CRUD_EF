@@ -21,7 +21,7 @@ namespace CRUD_EF.Controllers
             return Ok(await _db.Tareas.ToListAsync());
         }
 
-        [HttpGet(":id")]
+        [HttpGet("ObtenerPorId/:id")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             Tarea tarea = await _db.Tareas.FirstOrDefaultAsync(t => t.Id == id);
@@ -29,7 +29,7 @@ namespace CRUD_EF.Controllers
             return Ok(tarea);
         }
 
-        [HttpPost]
+        [HttpPost("Crear")]
         public async Task<IActionResult> PostAsync(Tarea tarea)
         {
             await _db.Tareas.AddAsync(tarea);
@@ -37,7 +37,7 @@ namespace CRUD_EF.Controllers
             return CreatedAtAction(null, null, tarea);
         }
 
-        [HttpPut]
+        [HttpPut("Editar")]
         public async Task<IActionResult> PutAsync(Tarea tarea)
         {
             Tarea tareaDB = await _db.Tareas.FirstOrDefaultAsync(t => t.Id == tarea.Id);
@@ -52,7 +52,7 @@ namespace CRUD_EF.Controllers
             return Ok(tarea);
         }
 
-        [HttpDelete(":id")]
+        [HttpDelete("Eliminar/:id")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             Tarea tareaDB = await _db.Tareas.FirstOrDefaultAsync(t => t.Id == id);
